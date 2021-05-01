@@ -1,0 +1,541 @@
+# This file contains a template for Numark DJ2GO2 Touch controller
+# For sliders & level knobs data3 contains input value
+# There are four different pad modes for numbered pads.
+# You can assign different commands for same button for each mode.
+
+debug: false
+
+inputs:
+  - note_id: 144
+    name: Play 1 down
+    data1: 0
+    execute:
+      type: noop
+  - note_id: 128
+    name: Play 1 up
+    data1: 0
+    execute:
+      type: noop
+  - note_id: 144
+    name: Cue 1 down
+    data1: 1
+    execute:
+      type: noop
+  - note_id: 128
+    name: Cue 1 up
+    data1: 1
+    execute:
+      type: noop
+  - note_id: 144
+    name: Sync 1 down
+    data1: 2
+    execute:
+      type: noop
+  - note_id: 128
+    name: Sync 1 up
+    data1: 2
+    execute:
+      type: noop
+
+  - note_id: 144
+    data1: 6
+    name: Jog touch 1 down
+    execute:
+      type: noop
+  - note_id: 128
+    data1: 6
+    name: Jog touch 1 up
+    execute:
+      type: noop
+
+  - note_id: 159
+    data1: 2
+    name: Load 1 down
+    execute:
+      type: noop
+  - note_id: 143
+    data1: 2
+    name: Load 1 up
+    execute:
+      type: noop
+  
+  - note_id: 145
+    name: Play 2 down
+    data1: 0
+    execute:
+      type: noop
+  - note_id: 129
+    name: Play 2 up
+    data1: 0
+    execute:
+      type: noop
+  - note_id: 145
+    name: Cue 2 down
+    data1: 1
+    execute:
+      type: noop
+  - note_id: 129
+    name: Cue 2 up
+    data1: 1
+    execute:
+      type: noop
+  - note_id: 145
+    name: Sync 2 down
+    data1: 2
+    execute:
+      type: noop
+  - note_id: 129
+    name: Sync 2 up
+    data1: 2
+    execute:
+      type: noop
+  
+  - note_id: 145
+    data1: 6
+    name: Jog touch 2 down
+    execute:
+      type: noop
+  - note_id: 129
+    data1: 6
+    name: Jog touch 2 up
+    execute:
+      type: noop
+
+  - note_id: 159
+    data1: 3
+    name: Load 1 down
+    execute:
+      type: noop
+  - note_id: 143
+    data1: 3
+    name: Load 1 up
+    execute:
+      type: noop
+
+  - note_id: 159
+    data1: 6
+    name: Browse press down
+    execute:
+      type: noop
+  - note_id: 143
+    data1: 6
+    name: Browse press up
+    execute:
+      type: noop
+
+  - note_id: 191
+    data1: 0
+    data2: 1 
+    name: Browse up
+    execute:
+      type: noop
+  - note_id: 191
+    data1: 0
+    data2: 127
+    name: Browse down
+    execute:
+      type: noop
+
+  - note_id: 191
+    data1: 10
+    name: Master level
+    execute:
+      type: noop
+  - note_id: 176
+    data1: 22
+    name: Level 1
+    execute:
+      type: noop
+
+  - note_id: 177
+    data1: 22
+    name: Level 2
+    execute:
+      type: noop
+  - note_id: 191
+    data1: 12
+    name: Cue level
+    execute:
+      type: noop
+
+  - note_id: 191
+    data1: 8
+    name: Crossfader
+    execute:
+      type: noop
+
+  - note_id: 176
+    data1: 9
+    name: Pitch 1
+    execute:
+      type: noop
+  - note_id: 177
+    data1: 9
+    name: Pitch 2
+    execute:
+      type: noop
+
+  - note_id: 176
+    data1: 6
+    name: Jog 1
+    execute:
+      type: noop
+  - note_id: 177
+    data1: 6
+    name: Jog 2
+    execute:
+      type: noop
+
+  - note_id: 128
+    data1: 27
+    name: Headphones 1 first press
+    execute:
+      type: noop
+  - note_id: 144
+    data1: 27
+    name: Headphones 1 second press
+    execute:
+      type: noop
+  - note_id: 129
+    data1: 27
+    name: Headphones 2 first press
+    execute:
+      type: noop
+  - note_id: 145
+    data1: 27
+    name: Headphones 2 second press
+    execute:
+      type: noop
+
+
+  # Pad mode: cues
+  - note_id: 148
+    data1: 1
+    name: 1 Button 1 down
+    execute:
+      type: noop
+  - note_id: 132
+    data1: 1
+    name: 1 Button 1 up
+    execute:
+      type: noop
+  - note_id: 148
+    data1: 2
+    name: 1 Button 2 down
+    execute:
+      type: noop
+  - note_id: 132
+    data1: 2
+    name: 1 Button 2 up
+    execute:
+      type: noop
+  - note_id: 148
+    data1: 3
+    name: 1 Button 3 down
+    execute:
+      type: noop
+  - note_id: 132
+    data1: 3
+    name: 1 Button 3 up
+    execute:
+      type: noop
+  - note_id: 148
+    data1: 4
+    name: 1 Button 4 down
+    execute:
+      type: noop
+  - note_id: 132
+    data1: 4
+    name: 1 Button 4 up
+    execute:
+      type: noop
+  
+  - note_id: 149
+    data1: 1
+    name: 2 Button 1 down
+    execute:
+      type: noop
+  - note_id: 133
+    data1: 1
+    name: 2 Button 1 up
+    execute:
+      type: noop
+  - note_id: 149
+    data1: 2
+    name: 2 Button 2 down
+    execute:
+      type: noop
+  - note_id: 133
+    data1: 2
+    name: 2 Button 2 up
+    execute:
+      type: noop
+  - note_id: 149
+    data1: 3
+    name: 2 Button 3 down
+    execute:
+      type: noop
+  - note_id: 133
+    data1: 3
+    name: 2 Button 3 up
+    execute:
+      type: noop
+  - note_id: 149
+    data1: 4
+    name: 2 Button 4 down
+    execute:
+      type: noop
+  - note_id: 133
+    data1: 4
+    name: 2 Button 4 up
+    execute:
+      type: noop
+
+  # Pad mode: auto
+  - note_id: 148
+    data1: 17
+    name: 1 Button 1 down
+    execute:
+      type: noop
+  - note_id: 132
+    data1: 17
+    name: 1 Button 1 up
+    execute:
+      type: noop
+  - note_id: 148
+    data1: 18
+    name: 1 Button 2 down
+    execute:
+      type: noop
+  - note_id: 132
+    data1: 18
+    name: 1 Button 2 up
+    execute:
+      type: noop
+  - note_id: 148
+    data1: 19
+    name: 1 Button 3 down
+    execute:
+      type: noop
+  - note_id: 132
+    data1: 19
+    name: 1 Button 3 up
+    execute:
+      type: noop
+  - note_id: 148
+    data1: 20
+    name: 1 Button 4 down
+    execute:
+      type: noop
+  - note_id: 132
+    data1: 20
+    name: 1 Button 4 up
+    execute:
+      type: noop
+  
+  - note_id: 149
+    data1: 17
+    name: 2 Button 1 down
+    execute:
+      type: noop
+  - note_id: 133
+    data1: 17
+    name: 2 Button 1 up
+    execute:
+      type: noop
+  - note_id: 149
+    data1: 18
+    name: 2 Button 2 down
+    execute:
+      type: noop
+  - note_id: 133
+    data1: 18
+    name: 2 Button 2 up
+    execute:
+      type: noop
+  - note_id: 149
+    data1: 19
+    name: 2 Button 3 down
+    execute:
+      type: noop
+  - note_id: 133
+    data1: 19
+    name: 2 Button 3 up
+    execute:
+      type: noop
+  - note_id: 149
+    data1: 20
+    name: 2 Button 4 down
+    execute:
+      type: noop
+  - note_id: 133
+    data1: 20
+    name: 2 Button 4 up
+    execute:
+      type: noop
+
+  # Pad mode: manual
+  - note_id: 148
+    data1: 33
+    name: 1 Button 1 down
+    execute:
+      type: noop
+  - note_id: 132
+    data1: 33
+    name: 1 Button 1 up
+    execute:
+      type: noop
+  - note_id: 148
+    data1: 34
+    name: 1 Button 2 down
+    execute:
+      type: noop
+  - note_id: 132
+    data1: 34
+    name: 1 Button 2 up
+    execute:
+      type: noop
+  - note_id: 148
+    data1: 35
+    name: 1 Button 3 down
+    execute:
+      type: noop
+  - note_id: 132
+    data1: 35
+    name: 1 Button 3 up
+    execute:
+      type: noop
+  - note_id: 148
+    data1: 36
+    name: 1 Button 4 down
+    execute:
+      type: noop
+  - note_id: 132
+    data1: 36
+    name: 1 Button 4 up
+    execute:
+      type: noop
+  
+  - note_id: 149
+    data1: 33
+    name: 2 Button 1 down
+    execute:
+      type: noop
+  - note_id: 133
+    data1: 33
+    name: 2 Button 1 up
+    execute:
+      type: noop
+  - note_id: 149
+    data1: 34
+    name: 2 Button 2 down
+    execute:
+      type: noop
+  - note_id: 133
+    data1: 34
+    name: 2 Button 2 up
+    execute:
+      type: noop
+  - note_id: 149
+    data1: 35
+    name: 2 Button 3 down
+    execute:
+      type: noop
+  - note_id: 133
+    data1: 35
+    name: 2 Button 3 up
+    execute:
+      type: noop
+  - note_id: 149
+    data1: 36
+    name: 2 Button 4 down
+    execute:
+      type: noop
+  - note_id: 133
+    data1: 36
+    name: 2 Button 4 up
+    execute:
+      type: noop
+
+  # Pad mode: sampler
+  - note_id: 148
+    data1: 49
+    name: 1 Button 1 down
+    execute:
+      type: noop
+  - note_id: 132
+    data1: 49
+    name: 1 Button 1 up
+    execute:
+      type: noop
+  - note_id: 148
+    data1: 50
+    name: 1 Button 2 down
+    execute:
+      type: noop
+  - note_id: 132
+    data1: 50
+    name: 1 Button 2 up
+    execute:
+      type: noop
+  - note_id: 148
+    data1: 51
+    name: 1 Button 3 down
+    execute:
+      type: noop
+  - note_id: 132
+    data1: 51
+    name: 1 Button 3 up
+    execute:
+      type: noop
+  - note_id: 148
+    data1: 52
+    name: 1 Button 4 down
+    execute:
+      type: noop
+  - note_id: 132
+    data1: 52
+    name: 1 Button 4 up
+    execute:
+      type: noop
+  
+  - note_id: 149
+    data1: 49
+    name: 2 Button 1 down
+    execute:
+      type: noop
+  - note_id: 133
+    data1: 49
+    name: 2 Button 1 up
+    execute:
+      type: noop
+  - note_id: 149
+    data1: 50
+    name: 2 Button 2 down
+    execute:
+      type: noop
+  - note_id: 133
+    data1: 50
+    name: 2 Button 2 up
+    execute:
+      type: noop
+  - note_id: 149
+    data1: 51
+    name: 2 Button 3 down
+    execute:
+      type: noop
+  - note_id: 133
+    data1: 51
+    name: 2 Button 3 up
+    execute:
+      type: noop
+  - note_id: 149
+    data1: 52
+    name: 2 Button 4 down
+    execute:
+      type: noop
+  - note_id: 133
+    data1: 52
+    name: 2 Button 4 up
+    execute:
+      type: noop

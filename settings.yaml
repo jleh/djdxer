@@ -1,0 +1,279 @@
+debug: true
+
+input: 0
+output: 1
+
+hamlib:
+  model: 2
+  device: localhost:4532
+
+inputs:
+  # PTT
+  - note_id: 144
+    data1: 6
+    name: TX on
+    execute:
+      type: hamlib
+      command: T 1
+
+  - note_id: 128
+    data1: 6
+    name: TX off
+    delay: 0.3
+    execute:
+      type: hamlib
+      command: T 0
+
+  # Meters
+  - note_id: 149
+    data1: 1
+    name: ALC meter
+    execute:
+      type: hamlib
+      command: w MS1;
+  - note_id: 149
+    data1: 2
+    name: PO meter
+    execute:
+      type: hamlib
+      command: w MS2;
+  - note_id: 149
+    data1: 3
+    name: COMP meter
+    execute:
+      type: hamlib
+      command: w MS3;
+  - note_id: 149
+    data1: 4
+    name: SWR meter
+    execute:
+      type: hamlib
+      command: w MS0;
+
+  # VFO
+  - note_id: 177
+    data1: 6
+    data2: 1
+    name: VFO up
+    throttle: 0.05
+    execute:
+      type: vfoup
+      step: 100
+
+  - note_id: 177
+    data1: 6
+    data2: 127
+    throttle: 0.05
+    name: VFO down
+    execute:
+      type: vfodown
+      step: 100
+
+  # Volume
+  - note_id: 177
+    data1: 22
+    name: SSB volume
+    normalize_value: True
+    execute:
+      type: shell
+      command: echo ssb_out $VALUE
+  - note_id: 191
+    data1: 12
+    name: RF Gain
+    normalize_value: True
+    execute:
+      type: shell
+      command: echo rf_gain $VALUE
+  - note_id: 176
+    data1: 22
+    name: Alsa gain
+    normalize_value: True
+    execute:
+      type: shell
+      command: echo alsa $VALUE
+
+  - note_id: 148
+    data1: 1
+    name: Waterfall width
+    execute:
+      type: shell
+      command: echo waterfall 3
+    led:
+      channel: 4
+      note_id: 1
+      value: 2
+      others: 1
+  - note_id: 148
+    data1: 2
+    name: Waterfall width 2
+    execute:
+      type: shell
+      command: echo waterfall 4
+    led:
+      channel: 4
+      note_id: 2
+      value: 2
+      others: 1
+  - note_id: 148
+    data1: 3
+    name: Waterfall width 3
+    execute:
+      type: shell
+      command: echo waterfall 5
+    led:
+      channel: 4
+      note_id: 3
+      value: 2
+      others: 1
+  - note_id: 148
+    data1: 4
+    name: Waterfall width 4
+    execute:
+      type: shell
+      command: echo waterfall 6
+    led:
+      channel: 4
+      note_id: 4
+      value: 2
+      others: 1
+
+
+  - note_id: 191
+    data1: 0
+    data2: 1
+    name: Encoder up
+    execute:
+      type: vfoup
+      step: 1000
+
+  - note_id: 191
+    data1: 0
+    data2: 127
+    name: Encoder down
+    execute:
+      type: vfodown
+      step: 1000
+
+  - note_id: 144
+    data1: 27
+    name: Start rig
+    execute:
+      type: hamlib
+      command: \set_powerstat 1
+    led:
+      channel: 0
+      note_id: 28
+      value: 100
+  - note_id: 128
+    data1: 27
+    name: Shutdown rig
+    execute:
+      type: hamlib
+      command: \set_powerstat 0
+    led:
+      channel: 0
+      note_id: 28
+      value: 0
+
+  - note_id: 148
+    data1: 17
+    name: Band 160 m
+    execute:
+      type: hamlib
+      command: w BS00;
+  - note_id: 148
+    data1: 18
+    name: Band 80 m
+    execute:
+      type: hamlib
+      command: w BS01;
+  - note_id: 148
+    data1: 19
+    name: Band 60 m
+    execute:
+      type: hamlib
+      command: w BS02;
+  - note_id: 148
+    data1: 20
+    name: Band 40 m
+    execute:
+      type: hamlib
+      command: w BS03;
+  - note_id: 149
+    data1: 17
+    name: Band 20 m
+    execute:
+      type: hamlib
+      command: w BS05;
+  - note_id: 149
+    data1: 18
+    name: Band 18 m
+    execute:
+      type: hamlib
+      command: w BS06;
+  - note_id: 149
+    data1: 19
+    name: Band 15 m
+    execute:
+      type: hamlib
+      command: w BS07;
+  - note_id: 149
+    data1: 20
+    name: Band 10 m
+    execute:
+      type: hamlib
+      command: w BS09;
+
+  - note_id: 144
+    data1: 0
+    name: Compressor
+    state: True
+    execute:
+      type: shell
+      command:
+        - echo proc 1 && echo meter 0
+        - echo proc 0 && echo meter 1
+    led:
+      channel: 0
+      note_id: 0
+      value:
+        - 100
+        - 1
+
+  - note_id: 145
+    data1: 27
+    name: vfo lock on
+    execute:
+      type: shell
+      command: echo lock 1
+  - note_id: 129
+    data1: 27
+    name: vfo lock off
+    execute:
+      type: shell
+      command: echo lock 0
+
+  - note_id: 148
+    data1: 33
+    name: CQ FI
+    execute:
+      type: shell
+      command: echo 'foo' # echo cq-fi
+
+  - note_id: 148
+    data1: 34
+    name: CQ EN
+    execute:
+      type: shell
+      command: echo 'foo' # echo cq-en
+
+  - note_id: 145
+    data1: 1
+    data2: 127
+    name: Rit
+    state: True
+    execute:
+      type: shell
+      command:
+        - echo rit 1
+        - echo rit 0
