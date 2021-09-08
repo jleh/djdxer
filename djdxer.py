@@ -5,6 +5,7 @@ import subprocess
 import math
 import yaml
 import re
+import logging
 
 from datetime import datetime, timedelta
 from time import sleep
@@ -22,8 +23,6 @@ def read_settings():
     return settings
 
 def listen_device(input_device, output_device, settings, hamlibClient):
-    debug = 'debug' in settings and settings['debug'] == True
-
     state = {
         'Compressor': False,
         'Rit': False
@@ -60,7 +59,7 @@ def listen_device(input_device, output_device, settings, hamlibClient):
 
         if 'normalize_value' in handler:
             value = '{0:03d}'.format(math.floor(event[2] / 1.27))
-            if debug: print(value)
+            logging.debug('Normalized value: %s', value)
 
         if 'state' in handler:
             state[handler['name']] = not state[handler['name']]
@@ -89,18 +88,17 @@ def listen_device(input_device, output_device, settings, hamlibClient):
         if input_device.poll():
             event = input_device.read(1)[0][0]
 
-            if debug:
-                print(event)
+            logging.debug('Input event: %s', event)
 
             event_handlers = list(filter(lambda x: get_input_event_handler(event, x), settings['inputs']))
 
             for handler in event_handlers:
                 if 'throttle' in handler and throttled_command > datetime.now():
-                    print('throttled')
+                    logging.debug('command throttled')
                     continue
 
                 if 'name' in handler:
-                    print(handler['name'])
+                    logging.info('Handler: %s', handler['name'])
 
                 if 'delay' in handler:
                     sleep(handler['delay'])
@@ -141,6 +139,11 @@ def start():
 
     settings = read_settings()
 
+    debug = 'debug' in settings and settings['debug'] == True
+    log_level = logging.DEBUG if debug else logging.INFO
+
+    logging.basicConfig(format='%(levelname)s: %(message)s', level=log_level)
+
     # Start hamlib client subprocess
     rig_model = str(settings['hamlib']['model'])
     rig_device = settings['hamlib']['device']
@@ -151,7 +154,7 @@ def start():
     midi_input = pygame.midi.Input(settings['input'])
     midi_output = pygame.midi.Output(settings['output'])
 
-    print('Started')
+    logging.info('Started')
 
     # Enter main loop
     listen_device(midi_input, midi_output, settings, hamlibClient)
