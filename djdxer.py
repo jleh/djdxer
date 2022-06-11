@@ -29,6 +29,7 @@ def listen_device(input_device, output_device, settings, hamlibClient):
     }
 
     throttled_command = datetime.now()
+    throttle_counter = 0
 
     def get_input_event_handler(event, input):
         note_match = event[0] == input['note_id']
@@ -109,6 +110,7 @@ def listen_device(input_device, output_device, settings, hamlibClient):
             for handler in event_handlers:
                 if 'throttle' in handler and throttled_command > datetime.now():
                     logging.debug('command throttled')
+                    throttle_counter = throttle_counter + 1
                     continue
 
                 if 'name' in handler:
@@ -119,11 +121,19 @@ def listen_device(input_device, output_device, settings, hamlibClient):
 
                 if handler['execute']['type'] == 'vfoup':
                     step = handler['execute']['step']
+                    
+                    if throttle_counter > 10:
+                        step = step * 10
+
                     current_freq = get_hamlib_number_response('f')
                     call_hamlib('F ' + str(current_freq + step))
 
                 if handler['execute']['type'] == 'vfodown':
                     step = handler['execute']['step']
+
+                    if throttle_counter > 10:
+                        step = step * 10
+
                     current_freq = get_hamlib_number_response('f')
                     call_hamlib('F ' + str(current_freq - step))
 
@@ -141,7 +151,9 @@ def listen_device(input_device, output_device, settings, hamlibClient):
                     switch_leds(handler)
 
                 if 'throttle' in handler:
+                    logging.debug('SKIPPED INPUTS ' + str(throttle_counter))
                     throttled_command = datetime.now() + timedelta(seconds=handler['throttle'])
+                    throttle_counter = 0
         
         else:
             # Prevent 100 % CPU utilization
