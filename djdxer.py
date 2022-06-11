@@ -48,8 +48,22 @@ def listen_device(input_device, output_device, settings, hamlibClient):
         output = hamlibClient.stdout.readline().decode('ascii')
         return int(re.findall(r'\d+', output)[0])
 
-    def execute_hamlib_command(handler):
-        command = handler['execute']['command']
+    def execute_hamlib_command(event, handler):
+        value = event[2]
+        
+        if 'fraction_value' in handler:
+            value = math.floor(event[2] / 1.27) / 100
+
+        elif 'normalize_value' in handler:
+            value = '{0:03d}'.format(math.floor(event[2] / 1.27))
+            logging.debug('Normalized value: %s', value)
+
+        if 'state' in handler:
+            state[handler['name']] = not state[handler['name']]
+            index = 0 if state[handler['name']] == True else 1
+            command = handler['execute']['command'][index]
+        else:
+            command = handler['execute']['command'].replace('$VALUE', str(value))
 
         print('Execute hamlib command: ' + command)
         call_hamlib(command)
@@ -117,7 +131,7 @@ def listen_device(input_device, output_device, settings, hamlibClient):
                     execute_shell_command(event, handler)
 
                 if handler['execute']['type'] == 'hamlib':
-                    execute_hamlib_command(handler)
+                    execute_hamlib_command(event, handler)
 
                 # if handler['execute']['type'] == 'state':
                 #    if handler['state'] in state:
