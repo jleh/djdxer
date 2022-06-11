@@ -74,23 +74,27 @@ inputs:
     data1: 22
     name: SSB volume
     normalize_value: True
+    throttle: 0.01
     execute:
-      type: shell
-      command: echo ssb_out $VALUE
+      type: noop
+      command: w EX107$VALUE;
   - note_id: 191
     data1: 12
     name: RF Gain
     normalize_value: True
+    throttle: 0.1
+    fraction_value: True
     execute:
-      type: shell
-      command: echo rf_gain $VALUE
+      type: hamlib
+      command: L RF $VALUE
   - note_id: 176
     data1: 22
-    name: Alsa gain
+    name: OSX Mic gain
     normalize_value: True
+    throttle: 0.1
     execute:
       type: shell
-      command: echo alsa $VALUE
+      command: osascript -e "set volume input volume $VALUE"
 
   - note_id: 148
     data1: 1
@@ -180,59 +184,59 @@ inputs:
     name: Band 160 m
     execute:
       type: hamlib
-      command: w BS00;
+      command: L BAND_SELECT 0;
   - note_id: 148
     data1: 18
     name: Band 80 m
     execute:
       type: hamlib
-      command: w BS01;
+      command: L BAND_SELECT 1;
   - note_id: 148
     data1: 19
     name: Band 60 m
     execute:
       type: hamlib
-      command: w BS02;
+      command: L BAND_SELECT 2;
   - note_id: 148
     data1: 20
     name: Band 40 m
     execute:
       type: hamlib
-      command: w BS03;
+      command: L BAND_SELECT 3;
   - note_id: 149
     data1: 17
     name: Band 20 m
     execute:
       type: hamlib
-      command: w BS05;
+      command: L BAND_SELECT 5;
   - note_id: 149
     data1: 18
     name: Band 18 m
     execute:
       type: hamlib
-      command: w BS06;
+      command: L BAND_SELECT 6;
   - note_id: 149
     data1: 19
     name: Band 15 m
     execute:
       type: hamlib
-      command: w BS07;
+      command: L BAND_SELECT 7;
   - note_id: 149
     data1: 20
     name: Band 10 m
     execute:
       type: hamlib
-      command: w BS09;
+      command: L BAND_SELECT 9;
 
   - note_id: 144
     data1: 0
     name: Compressor
     state: True
     execute:
-      type: shell
+      type: hamlib
       command:
-        - echo proc 1 && echo meter 0
-        - echo proc 0 && echo meter 1
+        - \set_level RFPOWER 0.15
+        - \set_level RFPOWER 1.0
     led:
       channel: 0
       note_id: 0
@@ -268,12 +272,41 @@ inputs:
       command: echo 'foo' # echo cq-en
 
   - note_id: 145
+    data1: 2
+    data2: 127
+    name: Preamp off
+    execute:
+      type: hamlib
+      command: L PREAMP 0
+
+  - note_id: 145
     data1: 1
     data2: 127
-    name: Rit
-    state: True
+    name: Preamp 1
     execute:
-      type: shell
-      command:
-        - echo rit 1
-        - echo rit 0
+      type: hamlib
+      command: L PREAMP 10
+
+  - note_id: 145
+    data1: 0
+    data2: 127
+    name: Preamp 2
+    execute:
+      type: hamlib
+      command: L PREAMP 20
+
+  - note_id: 159
+    data1: 3
+    data2: 127
+    name: Tune
+    execute:
+      type: hamlib
+      command: U TUNER 002
+
+  - note_id: 159
+    data1: 2
+    data2: 127
+    name: CQ Contest
+    execute:
+      type: hamlib
+      command: \send_voice_mem 2
